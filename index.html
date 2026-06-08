@@ -1,1 +1,367 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SafeClaims Portal</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background:#0f1115;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:450px;
+    background:#ffffff;
+    border-radius:18px;
+    padding:40px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.25);
+}
+
+.logo{
+    text-align:center;
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.logo-symbol{
+    font-size:30px;
+    color:#111;
+}
+
+h1{
+    text-align:center;
+    color:#111;
+    margin-bottom:8px;
+}
+
+.slogan{
+    text-align:center;
+    color:#666;
+    font-size:14px;
+    margin-bottom:30px;
+    line-height:1.5;
+}
+
+label{
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+    color:#222;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    margin-bottom:20px;
+    font-size:15px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#111;
+}
+
+.btn{
+    width:100%;
+    border:none;
+    padding:13px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.btn-primary{
+    background:#111;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#222;
+}
+
+.links{
+    margin-top:20px;
+    text-align:center;
+}
+
+.links a{
+    display:block;
+    margin:10px 0;
+    text-decoration:none;
+    color:#444;
+    font-size:14px;
+}
+
+.links a:hover{
+    color:black;
+}
+
+.info{
+    margin-top:25px;
+    background:#f5f5f5;
+    padding:15px;
+    border-radius:10px;
+    color:#555;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.inatividade{
+    margin-top:15px;
+    text-align:center;
+    color:#777;
+    font-size:12px;
+}
+
+.version{
+    text-align:center;
+    margin-top:20px;
+    color:#999;
+    font-size:12px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    overflow:auto;
+}
+
+.modal-content{
+    background:white;
+    width:90%;
+    max-width:700px;
+    margin:50px auto;
+    padding:30px;
+    border-radius:12px;
+}
+
+.modal-content h2{
+    margin-bottom:20px;
+    color:#111;
+}
+
+.modal-content p{
+    line-height:1.7;
+    color:#444;
+}
+
+.close{
+    float:right;
+    cursor:pointer;
+    font-size:28px;
+    color:#444;
+}
+
+.close:hover{
+    color:black;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <div class="logo-symbol">◈</div>
+    </div>
+
+    <h1>SafeClaims Portal</h1>
+
+    <div class="slogan">
+        Privacidade por design.<br>
+        Segurança por princípio.
+    </div>
+
+    <label>Chave de Acesso</label>
+
+    <input
+        type="password"
+        placeholder="Digite sua chave de acesso">
+
+    <button class="btn btn-primary">
+        Iniciar Sessão Segura
+    </button>
+
+    <div class="links">
+
+        <a href="#">
+            Primeiro acesso? Criar Chave
+        </a>
+
+        <a href="#" onclick="abrirRedefinir()">
+            Esqueceu sua chave?
+        </a>
+
+        <a href="#" onclick="abrirLGPD()">
+            LGPD e Privacidade
+        </a>
+
+    </div>
+
+    <div class="info">
+
+        Os dados processados durante a sessão permanecem sob controle do usuário.
+
+        <br><br>
+
+        O SafeClaims Portal foi projetado para reduzir a exposição de informações sensíveis e apoiar análises seguras.
+
+        <br><br>
+
+        Sessões inativas poderão ser bloqueadas automaticamente para proteção adicional.
+
+    </div>
+
+    <div class="inatividade">
+        Bloqueio automático por inatividade: 30 minutos
+    </div>
+
+    <div class="version">
+        SafeClaims Portal • Versão 0.1
+    </div>
+
+</div>
+
+<!-- Modal LGPD -->
+
+<div class="modal" id="lgpdModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="fecharLGPD()">&times;</span>
+
+        <h2>LGPD e Privacidade</h2>
+
+        <p>
+
+        O SafeClaims Portal foi projetado considerando princípios de privacidade, minimização de dados e segurança da informação.
+
+        <br><br>
+
+        A ferramenta permite o processamento de informações fornecidas pelo usuário para fins de análise, organização e geração de relatórios.
+
+        <br><br>
+
+        Os dados utilizados durante a sessão permanecem sob controle do usuário e poderão ser removidos ao encerrar a utilização do sistema.
+
+        <br><br>
+
+        O sistema busca reduzir a exposição de informações sensíveis por meio de mecanismos de proteção e boas práticas de privacidade.
+
+        <br><br>
+
+        A utilização da ferramenta não substitui as obrigações legais e organizacionais relacionadas à proteção de dados pessoais.
+
+        <br><br>
+
+        O tratamento de informações deve observar a legislação aplicável, incluindo a Lei nº 13.709/2018 (LGPD), bem como as políticas internas da organização responsável pela utilização do sistema.
+
+        <br><br>
+
+        Recomenda-se que apenas usuários autorizados utilizem dados pessoais dentro da plataforma.
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- Modal Redefinir Chave -->
+
+<div class="modal" id="resetModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="fecharRedefinir()">&times;</span>
+
+        <h2>Redefinir Chave de Acesso</h2>
+
+        <p>
+
+        A redefinição removerá a chave armazenada localmente neste dispositivo.
+
+        <br><br>
+
+        Caso existam informações não exportadas na sessão atual, elas poderão ser perdidas.
+
+        <br><br>
+
+        Após a redefinição, será necessário criar uma nova chave de acesso.
+
+        </p>
+
+        <br>
+
+        <button class="btn btn-primary">
+            Confirmar Redefinição
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function abrirLGPD(){
+    document.getElementById("lgpdModal").style.display="block";
+}
+
+function fecharLGPD(){
+    document.getElementById("lgpdModal").style.display="none";
+}
+
+function abrirRedefinir(){
+    document.getElementById("resetModal").style.display="block";
+}
+
+function fecharRedefinir(){
+    document.getElementById("resetModal").style.display="none";
+}
+
+window.onclick = function(event){
+
+    const lgpd = document.getElementById("lgpdModal");
+    const reset = document.getElementById("resetModal");
+
+    if(event.target == lgpd){
+        lgpd.style.display="none";
+    }
+
+    if(event.target == reset){
+        reset.style.display="none";
+    }
+}
+
+</script>
+
+</body>
+</html>
