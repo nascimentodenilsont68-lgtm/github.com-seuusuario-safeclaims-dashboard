@@ -1,8 +1,8 @@
-
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,7 +14,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Segoe UI',sans-serif;
 }
 
 body{
@@ -28,28 +28,26 @@ body{
 
 .container{
     width:100%;
-    max-width:450px;
-    background:#ffffff;
-    border-radius:18px;
+    max-width:460px;
+    background:#fff;
+    border-radius:20px;
     padding:40px;
-    box-shadow:0 20px 50px rgba(0,0,0,0.25);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
 .logo{
     text-align:center;
-    font-size:38px;
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 
-.logo-symbol{
-    font-size:30px;
-    color:#111;
+.logo-icon{
+    font-size:48px;
 }
 
 h1{
     text-align:center;
     color:#111;
-    margin-bottom:8px;
+    margin-bottom:10px;
 }
 
 .slogan{
@@ -57,23 +55,42 @@ h1{
     color:#666;
     font-size:14px;
     margin-bottom:30px;
-    line-height:1.5;
+    line-height:1.6;
 }
 
 label{
     display:block;
-    font-weight:600;
     margin-bottom:8px;
+    font-weight:600;
     color:#222;
+}
+
+.password-wrapper{
+    position:relative;
+}
+
+.password-wrapper input{
+    padding-right:50px;
+}
+
+.toggle-password{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-size:18px;
 }
 
 input{
     width:100%;
-    padding:12px;
+    padding:13px;
     border:1px solid #ddd;
     border-radius:8px;
-    margin-bottom:20px;
     font-size:15px;
+    margin-bottom:20px;
 }
 
 input:focus{
@@ -84,11 +101,11 @@ input:focus{
 .btn{
     width:100%;
     border:none;
-    padding:13px;
+    padding:14px;
     border-radius:8px;
     cursor:pointer;
     font-weight:600;
-    transition:0.3s;
+    transition:.3s;
 }
 
 .btn-primary{
@@ -109,12 +126,12 @@ input:focus{
     display:block;
     margin:10px 0;
     text-decoration:none;
-    color:#444;
+    color:#555;
     font-size:14px;
 }
 
 .links a:hover{
-    color:black;
+    color:#000;
 }
 
 .info{
@@ -122,21 +139,21 @@ input:focus{
     background:#f5f5f5;
     padding:15px;
     border-radius:10px;
-    color:#555;
     font-size:12px;
-    line-height:1.6;
+    color:#555;
+    line-height:1.7;
 }
 
 .inatividade{
     margin-top:15px;
     text-align:center;
-    color:#777;
     font-size:12px;
+    color:#777;
 }
 
 .version{
-    text-align:center;
     margin-top:20px;
+    text-align:center;
     color:#999;
     font-size:12px;
 }
@@ -148,8 +165,7 @@ input:focus{
     left:0;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.7);
-    overflow:auto;
+    background:rgba(0,0,0,.7);
 }
 
 .modal-content{
@@ -163,23 +179,35 @@ input:focus{
 
 .modal-content h2{
     margin-bottom:20px;
-    color:#111;
 }
 
 .modal-content p{
-    line-height:1.7;
+    line-height:1.8;
     color:#444;
 }
 
 .close{
     float:right;
-    cursor:pointer;
     font-size:28px;
-    color:#444;
+    cursor:pointer;
 }
 
 .close:hover{
-    color:black;
+    color:red;
+}
+
+.success{
+    color:green;
+    text-align:center;
+    margin-top:15px;
+    display:none;
+}
+
+.error{
+    color:red;
+    text-align:center;
+    margin-top:15px;
+    display:none;
 }
 
 </style>
@@ -191,7 +219,7 @@ input:focus{
 <div class="container">
 
     <div class="logo">
-        <div class="logo-symbol">◈</div>
+        <div class="logo-icon">🛡️</div>
     </div>
 
     <h1>SafeClaims Portal</h1>
@@ -201,15 +229,40 @@ input:focus{
         Segurança por princípio.
     </div>
 
-    <label>Chave de Acesso</label>
+    <label for="senha">
+        Chave de Acesso
+    </label>
 
-    <input
-        type="password"
-        placeholder="Digite sua chave de acesso">
+    <div class="password-wrapper">
 
-    <button class="btn btn-primary">
+        <input
+            id="senha"
+            type="password"
+            placeholder="Digite sua chave de acesso">
+
+        <button
+            class="toggle-password"
+            onclick="alternarSenha()">
+            👁
+        </button>
+
+    </div>
+
+    <button
+        class="btn btn-primary"
+        onclick="iniciarSessao()">
+
         Iniciar Sessão Segura
+
     </button>
+
+    <div class="success" id="successMsg">
+        Sessão iniciada com sucesso.
+    </div>
+
+    <div class="error" id="errorMsg">
+        Informe uma chave válida.
+    </div>
 
     <div class="links">
 
@@ -246,12 +299,10 @@ input:focus{
     </div>
 
     <div class="version">
-        SafeClaims Portal • Versão 0.1
+        SafeClaims Portal • Versão 1.0
     </div>
 
 </div>
-
-<!-- Modal LGPD -->
 
 <div class="modal" id="lgpdModal">
 
@@ -263,39 +314,15 @@ input:focus{
 
         <p>
 
-        O SafeClaims Portal foi projetado considerando princípios de privacidade, minimização de dados e segurança da informação.
+        O SafeClaims Portal foi desenvolvido com foco em segurança, privacidade e minimização de dados.
 
-        <br><br>
-
-        A ferramenta permite o processamento de informações fornecidas pelo usuário para fins de análise, organização e geração de relatórios.
-
-        <br><br>
-
-        Os dados utilizados durante a sessão permanecem sob controle do usuário e poderão ser removidos ao encerrar a utilização do sistema.
-
-        <br><br>
-
-        O sistema busca reduzir a exposição de informações sensíveis por meio de mecanismos de proteção e boas práticas de privacidade.
-
-        <br><br>
-
-        A utilização da ferramenta não substitui as obrigações legais e organizacionais relacionadas à proteção de dados pessoais.
-
-        <br><br>
-
-        O tratamento de informações deve observar a legislação aplicável, incluindo a Lei nº 13.709/2018 (LGPD), bem como as políticas internas da organização responsável pela utilização do sistema.
-
-        <br><br>
-
-        Recomenda-se que apenas usuários autorizados utilizem dados pessoais dentro da plataforma.
+        Recomenda-se que apenas usuários autorizados realizem o tratamento de informações pessoais, observando a LGPD e demais normas aplicáveis.
 
         </p>
 
     </div>
 
 </div>
-
-<!-- Modal Redefinir Chave -->
 
 <div class="modal" id="resetModal">
 
@@ -303,26 +330,24 @@ input:focus{
 
         <span class="close" onclick="fecharRedefinir()">&times;</span>
 
-        <h2>Redefinir Chave de Acesso</h2>
+        <h2>Redefinir Chave</h2>
 
         <p>
 
-        A redefinição removerá a chave armazenada localmente neste dispositivo.
+        Esta ação removerá a chave armazenada localmente.
 
-        <br><br>
-
-        Caso existam informações não exportadas na sessão atual, elas poderão ser perdidas.
-
-        <br><br>
-
-        Após a redefinição, será necessário criar uma nova chave de acesso.
+        Após a redefinição será necessário criar uma nova chave.
 
         </p>
 
         <br>
 
-        <button class="btn btn-primary">
+        <button
+            class="btn btn-primary"
+            onclick="redefinirChave()">
+
             Confirmar Redefinição
+
         </button>
 
     </div>
@@ -330,6 +355,44 @@ input:focus{
 </div>
 
 <script>
+
+function alternarSenha(){
+
+    const senha =
+    document.getElementById("senha");
+
+    senha.type =
+    senha.type === "password"
+    ? "text"
+    : "password";
+}
+
+function iniciarSessao(){
+
+    const senha =
+    document.getElementById("senha").value;
+
+    document.getElementById("successMsg").style.display="none";
+    document.getElementById("errorMsg").style.display="none";
+
+    if(senha.trim().length < 4){
+
+        document.getElementById("errorMsg").style.display="block";
+        return;
+    }
+
+    document.getElementById("successMsg").style.display="block";
+}
+
+document
+.getElementById("senha")
+.addEventListener("keypress",function(e){
+
+    if(e.key==="Enter"){
+        iniciarSessao();
+    }
+
+});
 
 function abrirLGPD(){
     document.getElementById("lgpdModal").style.display="block";
@@ -347,16 +410,28 @@ function fecharRedefinir(){
     document.getElementById("resetModal").style.display="none";
 }
 
-window.onclick = function(event){
+function redefinirChave(){
 
-    const lgpd = document.getElementById("lgpdModal");
-    const reset = document.getElementById("resetModal");
+    localStorage.removeItem("safeclaims_key");
 
-    if(event.target == lgpd){
+    alert("Chave redefinida com sucesso.");
+
+    fecharRedefinir();
+}
+
+window.onclick=function(event){
+
+    const lgpd =
+    document.getElementById("lgpdModal");
+
+    const reset =
+    document.getElementById("resetModal");
+
+    if(event.target==lgpd){
         lgpd.style.display="none";
     }
 
-    if(event.target == reset){
+    if(event.target==reset){
         reset.style.display="none";
     }
 }
@@ -365,3 +440,4 @@ window.onclick = function(event){
 
 </body>
 </html>
+```
